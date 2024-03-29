@@ -1,12 +1,14 @@
-import React from "react";
+import { useState } from "react";
 import { Canvas } from "react-three-fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Html } from "@react-three/drei";
 
 import { Shape, ExtrudeGeometry, Vector2 } from "three";
 
 import countriesGeojson from "./geo.json";
 
-const CountryComponent = ({ country, color, onClick }) => {
+const CountryComponent = ({ country, color, onClick, onHover }) => {
+    const [hovered, setHovered] = useState(false);
+
     const isMulti = country.geometry.type === "MultiPolygon";
 
     const createShapeGeometries = () => {
@@ -47,26 +49,54 @@ const CountryComponent = ({ country, color, onClick }) => {
         return geometries;
     };
 
-    const handleCountryClick = () => {
-        console.log(country.properties.CNTR_NAME);
-    };
-
     return (
         <group>
             {createShapeGeometries().map((geometry, index) => (
                 <mesh
                     key={index}
-                    onClick={onClick ? handleCountryClick : undefined}
                     geometry={geometry}
+                    onPointerOver={(e) => {
+                        setHovered(true);
+                        onHover(country.properties.CNTR_NAME);
+                    }}
+                    onPointerOut={(e) => {
+                        setHovered(false);
+                        onHover(null);
+                    }}
+                    scale={hovered ? [1, 1, 2] : [1, 1, 1]}
                 >
-                    <meshStandardMaterial color={color} />
+                    <meshBasicMaterial
+                        transparent={true}
+                        color={color}
+                        opacity={hovered ? 0.7 : 1}
+                    />
                 </mesh>
             ))}
         </group>
     );
 };
 
+const CountryInfo = ({ countryName }) => {
+    return (
+        <Html
+            style={{
+                background: "black",
+                color: "#ffffff",
+                fontSize: "25px",
+            }}
+        >
+            {countryName}
+        </Html>
+    );
+};
+
 const Map3D = () => {
+    const [hoveredCountry, setHoveredCountry] = useState(null);
+
+    const handleCountryHover = (countryName) => {
+        setHoveredCountry(countryName);
+    };
+
     return (
         <Canvas camera={{ position: [0, 0, 200] }}>
             <OrbitControls />
@@ -78,8 +108,10 @@ const Map3D = () => {
                     country={country}
                     color={`hsl(${index * 20}, 70%, 50%)`}
                     onClick
+                    onHover={handleCountryHover}
                 />
             ))}
+            <CountryInfo countryName={hoveredCountry} />
         </Canvas>
     );
 };
