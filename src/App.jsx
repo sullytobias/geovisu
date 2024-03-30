@@ -1,6 +1,6 @@
-import Map3D from "./Map3D";
+import Map3D from "./components/Map3D";
 
-import "./App.css";
+import "./App.scss";
 
 function App() {
     return (
