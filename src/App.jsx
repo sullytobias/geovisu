@@ -1,11 +1,11 @@
-import Map3D from "./components/Map3D";
+import SolarSystem from "./components/SolarSystem";
 
 import "./App.scss";
 
 function App() {
     return (
         <div className="App">
-            <Map3D />
+            <SolarSystem />
         </div>
     );
 }
