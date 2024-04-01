@@ -1,22 +1,29 @@
-import { Canvas } from "react-three-fiber";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 
-import { Country } from "./Country";
+import Sphere from "./Sphere";
 
-import countriesGeojson from "../resources/geo.json";
-
-const Map3D = () => {
+const ThreeScene = () => {
     return (
-        <Canvas camera={{ position: [0, 0, 200] }}>
-            <OrbitControls />
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} />
-
-            {countriesGeojson.features.map((country, index) => (
-                <Country key={index} country={country} onClick />
-            ))}
+        <Canvas
+            camera={{
+                fov: 75,
+                position: [0, 0, 2.1],
+            }}
+            style={{
+                cursor: "move",
+            }}
+        >
+            <OrbitControls
+                enableRotate={true}
+                enableZoom={true}
+                enablePan={false}
+            />
+            <ambientLight intensity={1.3} />
+            <pointLight position={[-10, -10, -10]} intensity={0.4} />
+            <Sphere />
         </Canvas>
     );
 };
 
-export default Map3D;
+export default ThreeScene;
