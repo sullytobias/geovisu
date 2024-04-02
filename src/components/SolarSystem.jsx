@@ -1,22 +1,36 @@
 import React, { Suspense } from "react";
-
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
-
-import Sun from "./Sun";
 import Planet from "./Planet";
 
-const SolarSystem = () => {
+const SolarSystem = ({ planets }) => {
     return (
-        <Canvas>
+        <Canvas camera={{ position: [0, 0, 1000] }}>
             <OrbitControls />
             <ambientLight intensity={0.5} />
             <pointLight position={[10, 10, 10]} />
+            <Stars radius={400} />
             <Suspense fallback={null}>
-                <Stars />
-                <Sun position={[0, 0, 0]} />
-                <Planet position={[5, 0, 0]} color="blue" radius={0.5} />
-                <Planet position={[8, 0, 0]} color="red" radius={0.3} />
+                {planets.map((planet, index) => {
+                    console.log(planet.id, planet.semimajorAxis);
+                    return (
+                        <Planet
+                            key={index}
+                            position={
+                                planet.englishName === "Sun"
+                                    ? [0, 0, 0]
+                                    : [
+                                          planet.semimajorAxis / 8000000 +
+                                              80 * (index + 1),
+                                          0,
+                                          0,
+                                      ]
+                            }
+                            color="red"
+                            radius={planet.meanRadius / 10000}
+                        />
+                    );
+                })}
             </Suspense>
         </Canvas>
     );
