@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Stars } from "@react-three/drei";
+import { Stars } from "@react-three/drei";
 import Planet from "./Planet";
 
 const SolarSystem = ({ planets }) => {
@@ -11,7 +11,6 @@ const SolarSystem = ({ planets }) => {
 
     return (
         <Canvas camera={{ position: [0, 0, 250], fov: 100 }}>
-            <OrbitControls />
             <ambientLight intensity={0.5} />
             <pointLight position={[10, 10, 10]} />
             <Stars radius={400} count={10000} />
