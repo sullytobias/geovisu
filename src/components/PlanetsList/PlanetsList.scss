@@ -1,0 +1,25 @@
+.planet-list {
+    position: absolute;
+    top: 20px;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .planet-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    z-index: 1;
+    font-size: 16px;
+    color: white;
+
+    transition: color 400ms linear;
+
+    &:hover  {
+        color: yellow; 
+        cursor: pointer;
+    }
+  }
+  
