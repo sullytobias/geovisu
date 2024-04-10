@@ -38,7 +38,8 @@ const Planet = ({
             planetRef.current.position.x = newX;
             planetRef.current.position.z = newZ;
 
-            planetRef.current.rotation.y = rotationAngle * rotationPeriod;
+            planetRef.current.rotation.y =
+                ((elapsedTime * Math.PI * 2) / rotationPeriod) * 5;
 
             if (isChosen) {
                 const targetX = newX;
@@ -53,12 +54,13 @@ const Planet = ({
                 camera.lookAt(newX, position[1], newZ);
             }
         } else
-            planetRef.current.rotation.y = (elapsedTime * 2 * Math.PI) / 7.25;
+            planetRef.current.rotation.y =
+                ((elapsedTime * 2 * Math.PI) / 648) * 5;
     });
 
     return (
         <mesh position={position} ref={planetRef}>
-            <sphereGeometry args={[radius, 32, 32]} />
+            <sphereGeometry args={[radius, 64, 64]} />
             {planetTexture && <meshBasicMaterial map={planetTexture} />}
         </mesh>
     );

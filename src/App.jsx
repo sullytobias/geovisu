@@ -10,7 +10,6 @@ const App = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        // Fetch planets
         const fetchPlanets = fetch(
             "https://api.le-systeme-solaire.net/rest/bodies?filter[]=isPlanet,eq,true&order=semimajorAxis"
         )
@@ -25,7 +24,6 @@ const App = () => {
                 throw error;
             });
 
-        // Fetch the Sun
         const fetchSun = fetch(
             "https://api.le-systeme-solaire.net/rest/bodies?filter[]=englishName,eq,Sun"
         )
@@ -40,7 +38,6 @@ const App = () => {
                 throw error;
             });
 
-        // Use Promise.allSettled to handle multiple promises
         Promise.allSettled([fetchPlanets, fetchSun])
             .then((results) => {
                 const allResult = [];

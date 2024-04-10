@@ -1,8 +1,9 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, Fragment } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
 
 import Planet from "./Planet";
+import PlanetInfo from "./PlanetInfo/PlanetInfo";
 import PlanetsList from "./PlanetsList/PlanetsList";
 
 const SolarSystem = ({ planets }) => {
@@ -13,18 +14,20 @@ const SolarSystem = ({ planets }) => {
     };
 
     return (
-        <>
+        <Fragment>
             <PlanetsList
                 chosenPlanet={(chosenPlanet) =>
                     setChosenPlanetFromMenu(chosenPlanet)
                 }
                 planets={planets}
             />
-            <Canvas camera={{ position: [0, 0, 250], fov: 100 }}>
-                <OrbitControls />
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} />
-                <Stars radius={400} count={30000} />
+            {chosenPlanetFromMenu && (
+                <PlanetInfo planet={chosenPlanetFromMenu} />
+            )}
+            <Canvas camera={{ position: [0, 0, 250], fov: 120 }}>
+                <OrbitControls enableZoom={false} enablePan={false} />
+
+                <Stars radius={700} count={30000} />
 
                 <Suspense fallback={null}>
                     {planets.map((planet, index) => (
@@ -50,13 +53,14 @@ const SolarSystem = ({ planets }) => {
                             rotationPeriod={planet.sideralRotation}
                             name={planet.englishName}
                             isChosen={
-                                planet.englishName === chosenPlanetFromMenu
+                                planet?.englishName ===
+                                chosenPlanetFromMenu?.englishName
                             }
                         />
                     ))}
                 </Suspense>
             </Canvas>
-        </>
+        </Fragment>
     );
 };
 
