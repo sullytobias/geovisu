@@ -24,10 +24,10 @@ const SolarSystem = ({ planets }) => {
             {chosenPlanetFromMenu && (
                 <PlanetInfo planet={chosenPlanetFromMenu} />
             )}
-            <Canvas camera={{ position: [0, 0, 250], fov: 120 }}>
+            <Canvas camera={{ position: [0, 0, 500], fov: 50 }}>
                 <OrbitControls enableZoom={false} enablePan={false} />
 
-                <Stars radius={700} count={30000} />
+                <Stars radius={600} count={30000} />
 
                 <Suspense fallback={null}>
                     {planets.map((planet, index) => (

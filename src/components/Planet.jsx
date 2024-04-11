@@ -45,11 +45,7 @@ const Planet = ({
                 const targetX = newX;
                 const targetZ = newZ + 10 + radius * 10;
 
-                camera.position.set(
-                    targetX,
-                    position[1] + 5,
-                    targetZ - radius * 8
-                );
+                camera.position.set(targetX, position[1] + 2, targetZ);
 
                 camera.lookAt(newX, position[1], newZ);
             }

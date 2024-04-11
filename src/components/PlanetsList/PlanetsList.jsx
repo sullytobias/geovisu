@@ -10,26 +10,25 @@ const PlanetList = ({ planets, chosenPlanet }) => {
         chosenPlanet(planet);
     };
 
-    return (
-        <div className="planet-list">
-            {planets.map(
-                (planet, index) =>
-                    planet.englishName !== "Sun" && (
-                        <div
-                            onClick={() => chosenHandler(planet)}
-                            className={`planet-item ${
-                                isChosen?.englishName === planet?.englishName
-                                    ? "is-chosen"
-                                    : ""
-                            }`}
-                            key={index}
-                        >
-                            <span>{planet.englishName}</span>
-                        </div>
-                    )
-            )}
-        </div>
-    );
+    const planetList = () =>
+        planets.map(
+            (planet, index) =>
+                planet.englishName !== "Sun" && (
+                    <div
+                        onClick={() => chosenHandler(planet)}
+                        className={`planet-item ${
+                            isChosen?.englishName === planet?.englishName
+                                ? "is-chosen"
+                                : ""
+                        }`}
+                        key={index}
+                    >
+                        <span>{planet.englishName}</span>
+                    </div>
+                )
+        );
+
+    return <div className="planet-list">{planetList()}</div>;
 };
 
 export default PlanetList;

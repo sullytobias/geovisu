@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import SolarSystem from "./components/SolarSystem";
 
 import "./App.scss";
+import Loader from "./components/Loader/Loader";
 
 const App = () => {
     const [solarSystemData, setSolarSystemData] = useState(null);
@@ -44,7 +45,8 @@ const App = () => {
                 results.map((res) => allResult.push(res.value.bodies));
 
                 setSolarSystemData(allResult.flat());
-                setLoading(false);
+
+                setTimeout(() => setLoading(false), 2000);
             })
             .catch((error) => {
                 setError(error);
@@ -52,16 +54,12 @@ const App = () => {
             });
     }, []);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
     if (error) {
         return <div>Error: {error.message}</div>;
     }
     return (
         <div className="App">
-            <SolarSystem planets={solarSystemData} />
+            {loading ? <Loader /> : <SolarSystem planets={solarSystemData} />}
         </div>
     );
 };

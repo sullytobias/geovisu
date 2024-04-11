@@ -1,26 +1,37 @@
 .planet-list {
-    position: absolute;
-    top: 20px;
-    padding: 20px 50px;
-    display: flex;
-    justify-content: space-evenly;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  color: wheat;
+  padding: 10px;
+  z-index: 1;
+  right: 0;
+  width: auto;
+  align-items: flex-end;
+}
+
+.planet-item {
+  cursor: pointer;
+  padding: 5px;
+  margin-bottom: 5px;
+  transition: color 0.3s ease;
+
+  &.is-chosen, &:hover  {
+    color: orangered;
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .planet-list {
+    flex-direction: row;
     width: 100%;
   }
   
   .planet-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-    z-index: 1;
-    font-size: 14px;
-    color: wheat;
-    text-transform: uppercase;
-
-    transition: color 400ms linear;
-
-    &:hover, &.is-chosen  {
-        color: orangered; 
-        cursor: pointer;
-    }
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
   }
-  
+}
