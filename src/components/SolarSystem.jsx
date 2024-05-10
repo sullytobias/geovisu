@@ -5,6 +5,7 @@ import { OrbitControls, Stars } from "@react-three/drei";
 import Planet from "./Planet";
 import PlanetInfo from "./PlanetInfo/PlanetInfo";
 import PlanetsList from "./PlanetsList/PlanetsList";
+import SunLight from "./Lights/SunLight";
 
 const SolarSystem = ({ planets }) => {
     const [chosenPlanetFromMenu, setChosenPlanetFromMenu] = useState(null);
@@ -28,6 +29,7 @@ const SolarSystem = ({ planets }) => {
                 <OrbitControls enableZoom={false} enablePan={false} />
 
                 <Stars radius={600} count={30000} />
+                <SunLight />
 
                 <Suspense fallback={null}>
                     {planets.map((planet, index) => (

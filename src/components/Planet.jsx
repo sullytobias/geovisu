@@ -57,7 +57,12 @@ const Planet = ({
     return (
         <mesh position={position} ref={planetRef}>
             <sphereGeometry args={[radius, 64, 64]} />
-            {planetTexture && <meshBasicMaterial map={planetTexture} />}
+
+            {planetTexture && name !== "Sun" ? (
+                <meshStandardMaterial map={planetTexture} />
+            ) : (
+                planetTexture && <meshBasicMaterial map={planetTexture} />
+            )}
         </mesh>
     );
 };
