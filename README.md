@@ -21,7 +21,7 @@ The Planetary System Viewer is a web-based application built using React.js and 
 
 ## Work in Progress
 
-- **Light Effects:** Enhance the visual experience with realistic lighting effects.
+- **Light Effects:** Enhance the visual experience with realistic lighting effects. **DONE**
 - **Code Refactoring:** Improve code structure and organization for better maintainability.
 
 ## Technologies Used
